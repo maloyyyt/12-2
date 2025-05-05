@@ -8,7 +8,7 @@ def read_transactions_from_csv(file_path: str) -> List[Dict[str, str]]:
     """
     transactions = []
     with open(file_path, mode='r', newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
+        reader = csv.DictReader(csvfile, delimiter=";")
         for row in reader:
             transactions.append(row)
     return transactions
