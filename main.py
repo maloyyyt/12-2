@@ -24,11 +24,11 @@ def main():
     elif choice == '2':
         print("Для обработки выбран CSV-файл.")
         filepath = "data/transactions.csv"
-        transactions = load_transactions_from_csv(filepath)
+        transactions = read_transactions_from_csv(filepath)
     elif choice == '3':
         print("Для обработки выбран XLSX-файл.")
-        filepath = "data/transactions.xlsx"
-        transactions = load_transactions_from_excel(filepath)
+        filepath = "data/transactions_excel.xlsx"
+        transactions = read_transactions_from_excel(filepath)
     else:
         print("Неверный выбор. Пожалуйста, выберите снова.")
         return
@@ -40,7 +40,7 @@ def main():
         status = input(
             "Введите статус, по которому необходимо выполнить фильтрацию. Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING: ").upper()
 
-    filtered_transactions = [t for t for t in transactions if t['state'] == status]
+    filtered_transactions = [t for t in transactions if t.get("state", {}) == status]
     print(f"Операции отфильтрованы по статусу \"{status}\"")
 
     sort_choice = input("Отсортировать операции по дате? Да/Нет: ").strip().lower()
@@ -50,13 +50,17 @@ def main():
 
     ruble_only = input("Выводить только рублевые транзакции? Да/Нет: ").strip().lower()
     if ruble_only == 'да':
-        filtered_transactions = [t for t in filtered_transactions if t['currency'] == 'руб.']
+        if choice == "1":
+            filtered_transactions = [t for t in filtered_transactions if
+                                     t.get('operationAmount', {}).get("currency", {}).get("code") == 'RUB']
+        else:
+            filtered_transactions = [t for t in filtered_transactions if t.get("currency_code") == 'RUB']
 
     search_description = input(
         "Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ").strip().lower()
     if search_description == 'да':
         search_string = input("Введите слово для поиска в описании: ")
-        filtered_transactions = search_operations_by_description(filtered_transactions, search_string)
+        filter_transactions_by_description = search_operations_by_description(filtered_transactions, search_string)
 
     if not filtered_transactions:
         print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации.")
@@ -64,9 +68,16 @@ def main():
         print("Распечатываю итоговый список транзакций...")
         print(f"Всего банковских операций в выборке: {len(filtered_transactions)}")
         for transaction in filtered_transactions:
-            print(f"{transaction['date']} {transaction['description']}")
-            print(f"Сумма: {transaction['amount']} {transaction['currency']}")
-            print()
+            if choice == "1":
+                print(f"{transaction['date']} {transaction['description']}")
+                print(
+                    f"Сумма: {transaction.get('operationAmount', {}).get('amount', {})} {transaction.get('operationAmount', {}).get('currency', {}).get('code')}")
+                print()
+            else:
+                print(f"{transaction['date']} {transaction['description']}")
+                print(
+                    f"Сумма: {transaction.get('amount', {})} {transaction.get('currency_code')}")
+                print()
 
 
 if __name__ == "__main__":
