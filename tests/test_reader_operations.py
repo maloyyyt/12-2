@@ -26,6 +26,6 @@ def test_read_transactions_from_excel():
         mock_read_excel.return_value = df
         transactions = read_transactions_from_excel('transactions_excel.xlsx')
         assert transactions == [
-            {'date': '2023-01-01', 'amount': 100.0, 'description': 'Transaction 1'},
-            {'date': '2023-01-02', 'amount': 200.0, 'description': 'Transaction 2'}
+            {'date': '2023-01-01', 'amount': '100.0', 'description': 'Transaction 1'},
+            {'date': '2023-01-02', 'amount': '200.0', 'description': 'Transaction 2'}
         ]

@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from src.external_api import get_amound_rub
+from src.external_api import get_amount_rub
 
 
 def test_get_amount_rub_from_rub():

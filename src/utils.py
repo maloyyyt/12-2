@@ -43,3 +43,22 @@ file_path = "operations.json"
 
 
 print(load_transactions(file_path))
+
+def get_data(file_path):
+    """
+    Загружает данные из JSON-файла.
+    """
+    logger = logging.getLogger('utils')  # Get logger within the function
+    logger.info(f"Загрузка данных из файла: {file_path}")
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            logger.info(f"Данные загружены успешно. Количество: {len(data)}")
+            return data
+    except FileNotFoundError:
+        logger.error(f"Файл не найден: {file_path}")
+        return None  # Or raise the exception, depending on your needs
+    except json.JSONDecodeError:
+        logger.error(f"Ошибка декодирования JSON в файле: {file_path}")
+        return None  # Or raise the exception
+

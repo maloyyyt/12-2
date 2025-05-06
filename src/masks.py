@@ -24,7 +24,7 @@ def get_mask_card_number(card_info):
     card_number = parts[-1]
     if len(card_number) != 16:
         raise ValueError("Номер карты должен содержать 16 цифр.")
-    masked_card = f"{card_number[:4]} {card_number[4:6]} **** {card_number[-4:]}"
+    masked_card = f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
     logger.info(f"Маскированный номер карты: {masked_card}")
     return " ".join(parts[:-1]) + " " + masked_card
 
@@ -37,9 +37,9 @@ def get_mask_account(account_info):
     account_number = parts[-1]
     if len(account_number) < 6:
         raise ValueError("Номер счета должен содержать не менее 6 цифр.")
-    masked_number = f"{account_number[-4:]}"
+    masked_number = f"**{account_number[-4:]}"
     logger.info(f"Маскированный номер карты: {masked_number}")
-    return " ".join(parts[:-1]) + " " + masked_number
+    return " ".join(parts[:-1]) + masked_number
 
 print(get_mask_account('36172638712'))
 print(get_mask_card_number('2737193628281631'))

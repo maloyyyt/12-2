@@ -17,4 +17,4 @@ def test_get_data():
 
     expected_result = json.loads(mock_data)
     assert result == expected_result
-    mock_file.assert_called_once_with("../data/operations.json", encoding='utf-8')
+    mock_file.assert_called_once_with("../data/operations.json", 'r', encoding='utf-8')
