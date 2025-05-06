@@ -1,9 +1,9 @@
 import re
+
 import pytest
-from src.banking_operations import (
-    filter_transactions_by_description,
-    count_transactions_by_category,
-)
+
+from src.banking_operations import (count_transactions_by_category,
+                                    filter_transactions_by_description)
 
 
 @pytest.fixture

@@ -1,10 +1,10 @@
-import pytest
 from unittest.mock import mock_open, patch
+
 import pandas as pd
-from src.reader_operations import (
-    read_transactions_from_csv,
-    read_transactions_from_excel,
-)
+import pytest
+
+from src.reader_operations import (read_transactions_from_csv,
+                                   read_transactions_from_excel)
 
 
 def test_read_transactions_from_csv():

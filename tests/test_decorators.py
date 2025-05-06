@@ -1,6 +1,5 @@
 import os
 
-
 from src.decorators import log
 
 

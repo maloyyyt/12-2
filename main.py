@@ -1,13 +1,11 @@
-import json
 import csv
+import json
+
 import pandas as pd
+
 from src.banking_operations import filter_transactions_by_description
-
-from src.reader_operations import (
-    read_transactions_from_csv,
-    read_transactions_from_excel,
-)
-
+from src.reader_operations import (read_transactions_from_csv,
+                                   read_transactions_from_excel)
 from src.utils import load_transactions
 
 
