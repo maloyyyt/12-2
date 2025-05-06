@@ -25,8 +25,8 @@ def get_date(date_str):
     Принимает на вход в формате "2024-03-11T02:26:18.671407" возвращает в формате "ДД.ММ.ГГГГ"
     """
     try:
-        date_part = date_str.split('T')[0]
-        year, month, day = date_part.split('-')
+        date_part = date_str.split("T")[0]
+        year, month, day = date_part.split("-")
         return f"{day}.{month}.{year}"
     except ValueError:
         raise ValueError("Неверный формат даты")

@@ -25,7 +25,9 @@ def sample_transactions() -> List[Dict[str, Any]]:
         ("CANCELED", 2),
     ],
 )
-def test_filter_by_state(sample_transactions: List[Dict[str, Any]], state: str, expected_count: int) -> None:
+def test_filter_by_state(
+    sample_transactions: List[Dict[str, Any]], state: str, expected_count: int
+) -> None:
     result = filter_by_state(sample_transactions, state)
     assert len(result) == expected_count
     assert all(tx["state"] == state for tx in result)

@@ -17,7 +17,11 @@ def test_get_mask_card_number(card_number: str, expected: str) -> None:
 
 @pytest.mark.parametrize(
     "number_acc, expected",
-    [("73654108430135874305", "**4305"), ("73654430135874305", "**4305"), ("73654108430135879024305", "**4305")],
+    [
+        ("73654108430135874305", "**4305"),
+        ("73654430135874305", "**4305"),
+        ("73654108430135879024305", "**4305"),
+    ],
 )
 def test_get_mask_account(number_acc: str, expected: str) -> None:
     assert get_mask_account(number_acc) == expected

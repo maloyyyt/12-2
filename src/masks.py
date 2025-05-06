@@ -1,16 +1,18 @@
 import logging
 import os
 
-if not os.path.exists('logs'):
-    os.makedirs('logs')
+if not os.path.exists("logs"):
+    os.makedirs("logs")
 
-logger = logging.getLogger('masks')
+logger = logging.getLogger("masks")
 logger.setLevel(logging.DEBUG)
 
-file_handler = logging.FileHandler('logs/masks.log', mode='w')
+file_handler = logging.FileHandler("logs/masks.log", mode="w")
 file_handler.setLevel(logging.DEBUG)
 
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 file_handler.setFormatter(file_formatter)
 
 logger.addHandler(file_handler)
@@ -41,5 +43,6 @@ def get_mask_account(account_info):
     logger.info(f"Маскированный номер карты: {masked_number}")
     return " ".join(parts[:-1]) + masked_number
 
-print(get_mask_account('36172638712'))
-print(get_mask_card_number('2737193628281631'))
+
+print(get_mask_account("36172638712"))
+print(get_mask_card_number("2737193628281631"))

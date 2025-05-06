@@ -1,6 +1,10 @@
 from typing import Dict, List
 import pytest
-from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+from src.generators import (
+    card_number_generator,
+    filter_by_currency,
+    transaction_descriptions,
+)
 
 
 @pytest.mark.parametrize(
@@ -8,29 +12,85 @@ from src.generators import card_number_generator, filter_by_currency, transactio
     [
         (
             [
-                {"id": 939719570, "operationAmount": {"amount": "9824.07", "currency": {"code": "USD"}}},
-                {"id": 142264268, "operationAmount": {"amount": "79114.93", "currency": {"code": "USD"}}},
-                {"id": 873106923, "operationAmount": {"amount": "43318.34", "currency": {"code": "RUB"}}},
-                {"id": 895315941, "operationAmount": {"amount": "56883.54", "currency": {"code": "USD"}}},
+                {
+                    "id": 939719570,
+                    "operationAmount": {
+                        "amount": "9824.07",
+                        "currency": {"code": "USD"},
+                    },
+                },
+                {
+                    "id": 142264268,
+                    "operationAmount": {
+                        "amount": "79114.93",
+                        "currency": {"code": "USD"},
+                    },
+                },
+                {
+                    "id": 873106923,
+                    "operationAmount": {
+                        "amount": "43318.34",
+                        "currency": {"code": "RUB"},
+                    },
+                },
+                {
+                    "id": 895315941,
+                    "operationAmount": {
+                        "amount": "56883.54",
+                        "currency": {"code": "USD"},
+                    },
+                },
             ],
             "USD",
             [
-                {"id": 939719570, "operationAmount": {"amount": "9824.07", "currency": {"code": "USD"}}},
-                {"id": 142264268, "operationAmount": {"amount": "79114.93", "currency": {"code": "USD"}}},
-                {"id": 895315941, "operationAmount": {"amount": "56883.54", "currency": {"code": "USD"}}},
+                {
+                    "id": 939719570,
+                    "operationAmount": {
+                        "amount": "9824.07",
+                        "currency": {"code": "USD"},
+                    },
+                },
+                {
+                    "id": 142264268,
+                    "operationAmount": {
+                        "amount": "79114.93",
+                        "currency": {"code": "USD"},
+                    },
+                },
+                {
+                    "id": 895315941,
+                    "operationAmount": {
+                        "amount": "56883.54",
+                        "currency": {"code": "USD"},
+                    },
+                },
             ],
         ),
         (
             [
-                {"id": 873106923, "operationAmount": {"amount": "43318.34", "currency": {"code": "RUB"}}},
-                {"id": 594226727, "operationAmount": {"amount": "67314.70", "currency": {"code": "RUB"}}},
+                {
+                    "id": 873106923,
+                    "operationAmount": {
+                        "amount": "43318.34",
+                        "currency": {"code": "RUB"},
+                    },
+                },
+                {
+                    "id": 594226727,
+                    "operationAmount": {
+                        "amount": "67314.70",
+                        "currency": {"code": "RUB"},
+                    },
+                },
             ],
             "USD",
             [],
         ),
     ],
 )
-def test_filter_by_currency(transactions: List[Dict], currency: str, expected: List[Dict]):
+def test_filter_by_currency(
+    transactions: List[Dict], currency: str, expected: List[Dict]
+):
     assert list(filter_by_currency(transactions, currency)) == expected
 
 
@@ -39,8 +99,22 @@ def test_filter_by_currency(transactions: List[Dict], currency: str, expected: L
     [
         (
             [
-                {"id": 939719570, "operationAmount": {"amount": "9824.07", "currency": {"code": "USD"}}, "description": "Перевод организации"},
-                {"id": 142264268, "operationAmount": {"amount": "79114.93", "currency": {"code": "USD"}}, "description": "Перевод со счета на счет"},
+                {
+                    "id": 939719570,
+                    "operationAmount": {
+                        "amount": "9824.07",
+                        "currency": {"code": "USD"},
+                    },
+                    "description": "Перевод организации",
+                },
+                {
+                    "id": 142264268,
+                    "operationAmount": {
+                        "amount": "79114.93",
+                        "currency": {"code": "USD"},
+                    },
+                    "description": "Перевод со счета на счет",
+                },
             ],
             ["Перевод организации", "Перевод со счета на счет"],
         ),
